@@ -1,19 +1,28 @@
-import React, { useEffect } from 'react'
-import { API_KEY } from '../../constants/constants'
+import React, { useEffect, useState } from 'react'
+import { API_KEY, imageUrl } from '../../constants/constants'
 import axios from '../../axios'
 import './Banner.css'
 
 function Banner() {
-    
+    const [movie, setMovie] = useState()
+    useEffect(() => {
+       axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
+           
+           setMovie(response.data.results[1])
+           
+       })
+    }, []) 
     return (
-        <div className="Banner">
+    
+        <div style={{backgroundImage : `url(${movie ? imageUrl+movie.backdrop_path : ""})`}}
+        className="Banner">
             <div className="content">
-                <h1 className='title'>Life of Shine the Great</h1>
+                <h1 className='title'>{ movie? movie.name : "" }</h1>
                 <div className='banner_buttons'>
                     <button className='button'>Play</button>
                     <button className='button'>My list</button>
                 </div>   
-                <h1 className='description'> This is the story of a stupid psychopath who bullies children for a living. The main protagonists in the movie are Shine the theetam and Suresh (A cute plant who drinks water 2 times a week) Based on true incidents.</h1> 
+                <h1 className='description'> { movie ? movie.overview:""}</h1> 
             </div> 
             <div className="fade_bottom"></div>           
         </div>
