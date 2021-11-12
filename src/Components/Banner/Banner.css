@@ -16,6 +16,8 @@
     font-size: 3rem;
     font-weight: 800;
     padding-bottom: 0.3rem;
+    color: black;
+    
 
 }
 
@@ -48,6 +50,7 @@
     font-size: 1rem;
     height: 80px;
     max-width: 360px;
+    color: black;
 }
 
 .fade_bottom{

@@ -4,11 +4,14 @@ import axios from '../../axios'
 import './Banner.css'
 
 function Banner() {
+    const styleObj = {
+        width : "600 px"
+    }
     const [movie, setMovie] = useState()
     useEffect(() => {
-       axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
+       axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&language=en-US`).then((response)=>{
            
-           setMovie(response.data.results[1])
+           setMovie(response.data.results[2])
            
        })
     }, []) 
@@ -17,7 +20,7 @@ function Banner() {
         <div style={{backgroundImage : `url(${movie ? imageUrl+movie.backdrop_path : ""})`}}
         className="Banner">
             <div className="content">
-                <h1 className='title' style="width: 600px;">{ movie? movie.title : "" }</h1>
+                <h1 className='title' style={styleObj}>{ movie? movie.title : "" }</h1>
                 <div className='banner_buttons'>
                     <button className='button'>Play</button>
                     <button className='button'>My list</button>
